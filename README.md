@@ -1,6 +1,6 @@
 # 🚗 Vehicle Fuel Efficiency Prediction
 
-> **A complete end-to-end Machine Learning project for predicting vehicle fuel efficiency (MPG) — built for Motorq internship application.**
+> **A complete end-to-end Machine Learning project for predicting vehicle fuel efficiency (MPG) using the UCI Auto-MPG dataset.**
 
 ![Python](https://img.shields.io/badge/Python-3.10-blue?logo=python) ![scikit-learn](https://img.shields.io/badge/scikit--learn-1.3-orange?logo=scikit-learn) ![License](https://img.shields.io/badge/License-MIT-green)
 
@@ -10,7 +10,7 @@
 
 Given the technical specifications of a vehicle (engine displacement, horsepower, weight, acceleration, model year, and origin), **predict its fuel efficiency in miles per gallon (MPG)** — a key metric for fleet management, emissions tracking, and procurement intelligence.
 
-This project maps directly to **Motorq's core domain**: connected vehicle analytics, fleet intelligence, and sustainability reporting.
+This is a practical demonstration of applying the full data science lifecycle — from raw data to production-ready model — on a real-world automotive dataset.
 
 ---
 
@@ -63,7 +63,7 @@ vehicle-efficiency-ML/
 7. Model Building           → 10 models compared via 5-fold CV
 8. Model Evaluation         → RMSE, MAE, R², residual & learning curves
 9. Business Insights        → 5 data-driven insights with visualizations
-10. Recommendations         → 7 actionable Motorq-specific strategies
+10. Recommendations         → 7 actionable business strategies
 ```
 
 ---
@@ -130,14 +130,14 @@ python src/predict.py
 
 ---
 
-## 💼 Motorq Relevance
+## 💼 Real-World Applications
 
-This project demonstrates skills directly applicable to Motorq's engineering work:
-- **Telematics data analysis** (vehicle attributes as streaming signals)
-- **Regression modeling** for real-time scoring
-- **Fleet-level insights** from vehicle-level predictions
-- **Anomaly detection** framework (predicted vs actual MPG delta)
-- **Carbon footprint estimation** (MPG → CO₂ g/mile)
+This project demonstrates skills applicable across automotive and fleet analytics:
+- **Telematics & IoT data analysis** (vehicle attributes as streaming signals)
+- **Regression modeling** for real-time efficiency scoring
+- **Fleet-level insights** derived from vehicle-level predictions
+- **Anomaly detection** (flag vehicles where actual MPG deviates from predicted)
+- **Carbon footprint estimation** (MPG → CO₂ g/mile for sustainability reporting)
 
 ---
 
