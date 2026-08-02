@@ -1,63 +1,39 @@
 """
 utils.py — Shared helper functions for the Vehicle Fuel Efficiency project
 """
-
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
-
-
-# ─── Data Loading ──────────────────────────────────────────────────────────────
-
 def load_raw(path: str = 'data/auto-mpg.csv') -> pd.DataFrame:
     """Load the raw Auto-MPG CSV, treating '?' as NaN."""
     df = pd.read_csv(path, na_values='?')
     return df
-
-
 def load_cleaned(path: str = 'data/auto-mpg-cleaned.csv') -> pd.DataFrame:
     return pd.read_csv(path)
-
-
 def load_features(path: str = 'data/auto-mpg-features.csv') -> pd.DataFrame:
     return pd.read_csv(path)
-
-
-# ─── Feature Engineering ───────────────────────────────────────────────────────
-
 def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
     """Apply all feature engineering steps to a DataFrame."""
     df = df.copy()
-
-    # Domain features
     df['power_to_weight']      = df['horsepower'] / df['weight']
     df['displacement_per_cyl'] = df['displacement'] / df['cylinders']
     df['log_weight']           = np.log(df['weight'])
     df['log_displacement']     = np.log(df['displacement'])
     df['log_horsepower']       = np.log(df['horsepower'])
     df['year_actual']          = df['model_year'] + 1900
-
-    # Ordinal weight class
     df['weight_class_enc'] = pd.cut(
         df['weight'],
         bins=[0, 2500, 3500, 4500, 10_000],
         labels=[0, 1, 2, 3]
     ).astype(float)
-
-    # Era based on oil crisis
     df['era_enc'] = pd.cut(
         df['model_year'],
         bins=[69, 73, 78, 83],
         labels=[0, 1, 2]
     ).astype(float)
-
     return df
-
-
-# ─── Evaluation ────────────────────────────────────────────────────────────────
-
 def regression_metrics(y_true, y_pred, label: str = '') -> dict:
     """Return dict of RMSE, MAE, R² for a prediction set."""
     metrics = {
@@ -67,15 +43,9 @@ def regression_metrics(y_true, y_pred, label: str = '') -> dict:
         'MAE':   round(mean_absolute_error(y_true, y_pred), 4),
     }
     return metrics
-
-
 def print_metrics(y_true, y_pred, label: str = 'Model'):
     m = regression_metrics(y_true, y_pred, label)
     print(f'[{m["label"]}]  R²={m["R2"]:.4f} | RMSE={m["RMSE"]:.4f} | MAE={m["MAE"]:.4f}')
-
-
-# ─── Plotting Helpers ──────────────────────────────────────────────────────────
-
 def plot_actual_vs_predicted(y_true, y_pred, title: str = 'Actual vs Predicted',
                               save_path: str = None):
     """Scatter plot of actual vs predicted values with perfect prediction line."""
@@ -95,8 +65,6 @@ def plot_actual_vs_predicted(y_true, y_pred, title: str = 'Actual vs Predicted',
     if save_path:
         plt.savefig(save_path, dpi=150, bbox_inches='tight')
     plt.show()
-
-
 def plot_feature_importance(model, feature_names: list, top_n: int = 15,
                              title: str = 'Feature Importance', save_path: str = None):
     """Horizontal bar chart of feature importances."""
